@@ -1,8 +1,13 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys     
+"""
+
+"""
+
+#import sys     
 import os
 import time
-import datetime
+#import datetime
 import argparse
 ####################################################################################
 # layerpublisher v.0.0
@@ -45,8 +50,14 @@ if __name__ == '__main__':
 # --------------------------------------------------------------
 # II - Zip and Upload
 # --------------------------------------------------------------
-# Zip
-os.system('zip -j '+layerDirectory+layerName+'.zip '+layerDirectory+layerName+'.*')
+pth = layerDirectory + layerName+'.zip'
+
+if not os.path.exists(pth):
+  # Zip
+  os.system('zip -j '+ pth + ' ' + layerDirectory+layerName+'.*')
+else:
+  print (pth + " Exist")
+  
 # Upload
 # The name of the layer on the geoserver will be the same as the layer contained in the zip
 os.system("curl -v -u "+loginPassword+" -XPUT -H 'Content-type: application/zip'   --data-binary @"+layerDirectory+layerName+".zip "+geoserverUrl+"rest/workspaces/"+workspaceName+"/datastores/"+storeName+"/file.shp")
@@ -62,3 +73,6 @@ if layerStyle != "" :
 	# Add extra SLD
 	# It is advisable to have a single layer name because geoserver (v2.5) renames duplicate layers (adding a variable increment at the end of the name), which then causes problems for the style association.
 	os.system("curl -u "+loginPassword+" -XPUT -H 'Content-type: text/xml' -d '<layer><styles>"+additionalSld+"<workspace>"+workspaceName+"</workspace></styles></layer>' "+geoserverUrl+"rest/layers/"+workspaceName+":"+layerName)
+ 
+  
+  
