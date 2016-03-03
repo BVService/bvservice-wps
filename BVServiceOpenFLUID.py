@@ -29,8 +29,8 @@ class BVServiceOpenFLUID:
 
     self.SourceProject = self.SourceProjectsPath +"/"+ self.ProjectToRun
 
-#    self.ExecProject = self.ExecPath +"/"+ self.ProjectToRun +"_"+ self.CurrentDateTime
-    self.ExecProject = self.ExecPath +"/"+ self.ProjectToRun
+    self.ExecProject = self.ExecPath +"/"+ self.ProjectToRun +"_"+ self.CurrentDateTime
+#    self.ExecProject = self.ExecPath +"/"+ self.ProjectToRun
     self.ExecIN = self.ExecProject +"/IN"
     self.ExecOUT = self.ExecProject +"/OUT"
 
